@@ -42,6 +42,7 @@ function record(buffer, variable, recordDimension) {
     // size of the data
     // TODO streaming data
     var size = recordDimension.length;
+    var width = recordDimension.width;
 
     // iterates over the data
     var data = new Array(size);
@@ -49,7 +50,7 @@ function record(buffer, variable, recordDimension) {
 
     for (var i = 0; i < size; i++) {
         var currentOffset = buffer.offset;
-        data[i] = types.readType(buffer, type, 1);
+        data[i] = types.readType(buffer, type, width);
         buffer.seek(currentOffset + step);
     }
 

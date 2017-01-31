@@ -90,7 +90,7 @@ class NetCDFReader {
      * @param {string|object} variableName - Name of the variable to search or variable object
      * @return {Array} - List with the variable values
      */
-    getDataVariable(variableName) {
+    getDataVariable(variableName,recordDimensionWidth) {
         var variable;
         if (typeof variableName === 'string') {
             // search the variable
@@ -106,6 +106,9 @@ class NetCDFReader {
 
         // go to the offset position
         this.buffer.seek(variable.offset);
+
+        //Set the record dimension width
+        this.header.recordDimension.width =recordDimensionWidth?recordDimensionWidth:1;
 
         if (variable.record) {
             // record variable case
